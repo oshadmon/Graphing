@@ -27,10 +27,15 @@ optional arguments:
                         Location to store graph [/var/www/html]
 
 ```
+
 ```ubuntu@ori-foglamp:~/Graphing$ python3 graph.py ubuntu:foglamp 127.0.0.1:5432 github 'SELECT timestamp, SUM(today), SUM (total) FROM github_traffic GROUP BY timestamp ORDER BY timestamp;' -t 'GitHub Traffic over Time' -g line -d /var/www/html/github_graphs/``` 
 ![Alt text](https://github.com/oshadmon/Graphing/blob/master/imgs/2018_09_05_GitHub_Traffic_over_Time.png)
+
+
 ```ubuntu@ori-foglamp:~/Graphing$ python3 graph.py ubuntu:foglamp 127.0.0.1:5432 github 'SELECT referral, MAX(total) FROM github_referrals GROUP BY referral ORDER BY SUM(today) ASC;' -t 'GitHub Referrals Today' -g bar -d /var/www/html/github_graphs```
 ![Alt text](https://github.com/oshadmon/Graphing/blob/master/imgs/2018_09_05_GitHub_Referrals_Today.png)
+
+
 ```ubuntu@ori-foglamp:~/Graphing$ python3 graph.py ubuntu:foglamp 127.0.0.1:5432 github 'SELECT referral, MAX(total) FROM github_referrals GROUP BY referral ORDER BY SUM(today) ASC;' -t 'GitHub Referrals Overall' -g pie -d /var/www/html/github_graphs```
 ![Alt text](https://github.com/oshadmon/Graphing/blob/master/imgs/2018_09_05_GitHub_Referrals_Overall.png)
 
