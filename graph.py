@@ -187,11 +187,11 @@ def main():
 
    gg=GenerateGraph(usr=args.usr, hst=args.hst, db=args.db, query=args.query, title=args.title, data_dir=args.data_dir) 
 
-   if args.graph == 'line': 
+   if args.graph.lower() == 'line': 
       gg.draw_line_graph() 
-   if args.graph == 'bar': 
+   if args.graph.lower() == 'bar': 
       gg.draw_bar_graph() 
-   if args.graph == 'pie':
+   if args.graph.lower() == 'pie':
       gg.draw_pie_graph()
 
 if __name__ == '__main__': 
