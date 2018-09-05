@@ -13,7 +13,6 @@ import plotly.plotly as py
 class GenerateGraph: 
    def __init__(self, usr:str='root:passwd', hst:str='localhost:54321', db:str='test', query:str='SELECT * FROM table',
                 title:str='', data_dir:str='/var/www/html'):
-
       """
       Generate graphs based on the results in database 
       :param: 
@@ -58,7 +57,7 @@ class GenerateGraph:
 
    def generate_data(self)->dict: 
       """
-      Execute query + store results in dict
+      Execute query & store results in dict
       :return: 
          dictionary of results
       """
@@ -77,7 +76,7 @@ class GenerateGraph:
 
    def draw_line_graph(self): 
      """
-     Based on the results in the table, graph the output
+     Based on the results in the table, draw a line graph 
      :args: 
         yaxy:str - y-axy name
         data:dict - data to graph 
@@ -163,33 +162,37 @@ class GenerateGraph:
 
 def main(): 
    """
+   Main
    :positional arguments:
-      host                  host/port connection to database [127.0.0.1:5432]
-      user                  user/password to database [root:passwd]
-      dbname                database name [test]
-      html_file             File containing output image
-
+      usr                   user/password to database [root:passwd]
+      hst                   host/port to database [localhost:5432]
+      db                    database name [test]
+      query                 query to execute
    :optional arguments:
-      -h,             --help       show this help message and exit
-      --title         TITLE        Title of the graph
-      --query         QUERY        Select statement to run against (2 values in select max)
-      --total-only    TOTAL_ONLY   Graph only the cummulated values
-      --daily-only    DAILY_ONLY   Dont graph the cummulated values
+      -h, --help            show this help message and exit
+      -t, --title           graph Name
+      -g, --graph           Type of graph to draw [line | bar | pie]
+      -d, --data-dir        location to store graph [/var/www/html]
    """
    parser = argparse.ArgumentParser()
    parser.add_argument('usr',                  default='root:passwd',         help='user/password to database [root:passwd]') 
    parser.add_argument('hst',                  default='localhost:5432',       help='host/port to database [localhost:5432]')    
    parser.add_argument('db',                   default='test',                help='database name [test]')
    parser.add_argument('query',                default='SELECT * FROM table', help='query to execute') 
-   parser.add_argument('-t', '--title',    default='',                    help='graph Name') 
-   parser.add_argument('-g', '--graph',    default='line',                help='Type of graph to draw [line | bar | pie]') 
-   parser.add_argument('-d',   '--data-dir', default='/var/www/html',       help='Location to store graph [/var/www/html]')
+   parser.add_argument('-t', '--title',        default='',                    help='graph Name') 
+   parser.add_argument('-g', '--graph',        default='line',                help='Type of graph to draw [line | bar | pie]') 
+   parser.add_argument('-d',   '--data-dir',   default='/var/www/html',       help='Location to store graph [/var/www/html]')
    args = parser.parse_args()
 
    gg=GenerateGraph(usr=args.usr, hst=args.hst, db=args.db, query=args.query, title=args.title, data_dir=args.data_dir) 
-   #gg.draw_line_graph() 
-   #gg.draw_bar_graph() 
-   gg.draw_pie_graph()
+
+   if args.graph == 'line': 
+      gg.draw_line_graph() 
+   if args.graph == 'bar': 
+      gg.draw_bar_graph() 
+   if args.graph == 'pie':
+      gg.draw_pie_graph()
+
 if __name__ == '__main__': 
    main()
 
