@@ -82,7 +82,6 @@ class GenerateGraph:
         data:dict - data to graph 
         file_name:str - HTML file that stores graph 
      """ 
-     yaxy="count" 
      data=self.generate_data() 
      file_name=self.data_dir+'/%s_%s.html' % (datetime.datetime.now().strftime('%Y_%m_%d'), self.title.replace('AND', '').replace('  ', ' ').replace(' ', '_'))
      # Generate Trace 
@@ -91,13 +90,14 @@ class GenerateGraph:
         traces.append(go.Scatter(
            x=data[self.xaxy], 
            y=data[self.yaxy[key-1]]
-          )
-        )
+         )
+     )
      # Layout 
      layout = go.Layout( 
            title=self.title,
      )
      off.plot({'data': traces, 'layout': layout}, auto_open=True, filename=file_name)
+
      # Add query bellow graph
      with open(file_name, 'a') as f: 
         f.write("<body><div><center>"+self.query+"</center></div></body>") 
@@ -120,7 +120,8 @@ class GenerateGraph:
            x=data[self.xaxy], 
            y=data[self.yaxy[key-1]],
            orientation='v'
-        ))
+        )
+     )
      # Layout 
      layout = go.Layout(
         title=self.title,
