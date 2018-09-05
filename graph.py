@@ -103,6 +103,34 @@ class GenerateGraph:
      with open(file_name, 'a') as f: 
         f.write("<body><div><center>"+self.query+"</center></div></body>") 
 
+   def draw_bar_graph(self): 
+     """
+     Based on the results in the table, graph the output on a horizontal bar graph
+     :args: 
+        yaxy:str - y-axy 
+        data:dict - data to graph 
+        file_name:str - HTML file that stores the graph
+     """ 
+     yaxy='count'
+     data=self.generate_data()
+     file_name=self.data_dir+'/%s_%s.html' % (datetime.datetime.now().strftime('%Y_%m_%d'), self.title.replace('AND', '').replace('  ', ' ').replace(' ', '_'))
+     # Generate Teaces 
+     traces=[]
+     for key in range(1, len(data)):
+        traces.append(go.Bar(
+           x=data[self.xaxy], 
+           y=data[self.yaxy[key-1]],
+           orientation='v'
+        ))
+     # Layout 
+     layout = go.Layout(
+        title=self.title,
+     )
+     off.plot({'data': traces, 'layout': layout}, auto_open=True, filename=file_name)
+     # Add query bellow graph
+     with open(file_name, 'a') as f:
+        f.write("<body><div><center>"+self.query+"</center></div></body>")
+
 def main(): 
    """
    :positional arguments:
@@ -129,7 +157,8 @@ def main():
    args = parser.parse_args()
 
    gg=GenerateGraph(usr=args.usr, hst=args.hst, db=args.db, query=args.query, title=args.title, data_dir=args.data_dir) 
-   gg.draw_line_graph() 
+   #gg.draw_line_graph() 
+   gg.draw_bar_graph() 
 
 if __name__ == '__main__': 
    main()
