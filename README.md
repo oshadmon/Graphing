@@ -2,7 +2,7 @@
 
 The following code takes a given query and generates a graph from it. In a given query, the first column is used as the x-axy, while all others will be the values graphed. 
 
-Example: In the following query, ``SELECT timestamp, SUM(total) FROM table_name GROUP BY timestamp;```. ```timestamp``` is the X-AXY and ```SUM(total)``` are the values being graphed.
+Example: In the following query, ```SELECT timestamp, SUM(total) FROM table_name GROUP BY timestamp;```. ```timestamp``` is the X-AXY and ```SUM(total)``` are the values being graphed.
 
 # Files & Sample Code
 
