@@ -58,6 +58,11 @@ class GenerateGraph:
    def generate_data(self)->dict: 
       """
       Execute query & store results in dict
+      :sample: 
+         Given the query - 'SELECT timestamp, SUM(col1) FROM table GROUP BY timestamp ORDER BY timestamp'; the results stored in 
+         a dict object, with each column being used a key.  When needed to graph, the first column in the query is used the x-axy,
+         while all other columns are used for graphing. In the query shown: timestamp would be the x-axy while SUM(col1) would be the  
+         values graphed (ie Y-AXY values). 
       :return: 
          dictionary of results
       """
