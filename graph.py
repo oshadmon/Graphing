@@ -30,9 +30,9 @@ def main():
    parser.add_argument('hst',                  default='localhost:5432',       help='host/port to database [localhost:5432]')    
    parser.add_argument('db',                   default='test',                help='database name [test]')
    parser.add_argument('query',                default='SELECT * FROM table', help='query to execute') 
-   #parser.add_argument('-t', '--title',        default='',                    help='graph Name') 
-   #parser.add_argument('-g', '--graph',        default='line',                help='Type of graph to draw [line | bar | pie]') 
-   #parser.add_argument('-d',   '--data-dir',   default='/var/www/html',       help='Location to store graph [/var/www/html]')
+   parser.add_argument('-t', '--title',        default='',                    help='graph Name') 
+   parser.add_argument('-g', '--graph',        default='line',                help='Type of graph to draw [line | bar | pie]') 
+   parser.add_argument('-d',   '--data-dir',   default='/var/www/html',       help='Location to store graph [/var/www/html]')
    args = parser.parse_args()
 
    dbms = connect_dbms.DBMS(args.usr, args.hst, args.db)
@@ -42,7 +42,7 @@ def main():
    dict_results = str_to_json(results[1])
 
    for key in  dict_results: 
-      drw.draw('line', 'query.html', '', dict_results[key])
+      drw.draw('pie', 'query.html', '', dict_results[key])
 
 if __name__ == '__main__': 
    main()

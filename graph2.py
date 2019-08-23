@@ -159,6 +159,7 @@ class GenerateGraph:
         labels=data[self.xaxy],
         values=data[values]
      )
+     print(traces)
      # Layout 
      layout = go.Layout(
         title=self.title,
